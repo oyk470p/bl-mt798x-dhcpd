@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       TARGET:
-        description: 'Build target (format: soc,board). Default: all. e.g. mt7981,cmcc_a10'
+        description: 'Build target (format: soc,board). Default: all. e.g. mt7986,jdcloud_re-cp-03'
         required: true
-        default: 'all'
+        default: 'e.g. mt7986,jdcloud_re-cp-03'
         type: string
       OC_BL2:
         description: 'Build 1.6GHz BL2 by patch'
@@ -14,7 +14,7 @@ on:
         default: false
         type: boolean
       CUSTOM_IP:
-        description: 'Custom default IP for DHCPD (e.g. 192.168.31.1)'
+        description: 'Custom default IP for DHCPD (e.g. 192.168.1.1)'
         required: false
         default: 'false'
         type: string
@@ -73,7 +73,7 @@ jobs:
           if [ -n "$TARGET" ] && [ "$TARGET" != "all" ]; then
             # format: soc,board -> soc_board_defconfig
             if ! echo "$TARGET" | grep -Eq '^[A-Za-z0-9._-]+,[A-Za-z0-9._-]+$'; then
-              echo "Illegal TARGET: '$TARGET_RAW' (expected: soc,board). e.g. mt7981,cmcc_a10" >&2
+              echo "Illegal TARGET: '$TARGET_RAW' (expected: soc,board). e.g. mt7986,jdcloud_re-cp-03" >&2
               exit 1
             fi
 
